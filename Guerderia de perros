@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+//Variables para el ingreso de datos de usuario.
+
+int id;
+char name[16];
+char race[16];
+int age;
+int accTime;
+
+//Funcion para calcular factura a pagar.
+int receipt(int i)
+{
+	int weeklyAcc = 30;
+	int total;
+	total = weeklyAcc * i;
+	
+	printf("..Total a pagar: %i\n", total);
+	
+	return total;
+}
+
+
+int main(int argc, char *argv[]) 
+{
+	printf("...Datos Principales...\n");
+	printf("..Ingrese los siguientes datos:\n");
+	
+	//Input data
+	printf("ID del propietario: ");
+	scanf("%d", &id);
+	
+	printf("Nombre: ");
+	scanf("%s", &name);
+	
+	printf("Raza: ");
+	scanf("%s", &race);
+	
+	printf("Edad: ");
+	scanf("%d", &age);
+	
+	printf("Tiempo de alojamiento (semanas): ");
+	scanf("%d", &accTime);
+	
+	//Datos de facturacion.
+	printf("..Datos de facturacion..");
+	
+	printf("ID: %i\n", id);
+	printf("Nombre: %s\n", name);
+	printf("Raza: %s\n", race);
+	printf("Edad: %i\n", age);
+	printf("Tiempo de Alojamiento: %i\n", accTime);
+	
+	//Factura Total
+	receipt(accTime);
+	return 0;
+}
