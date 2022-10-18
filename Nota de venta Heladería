@@ -1,0 +1,86 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+//se desea desarrollar un programa para una heladeria que le permita emitir notas de venta , >Considerar que por la compra de ma de 5 helados se aplicara el descuento del 6 prociento,
+//por lacompra de 8 helados se aplicara el  8% y de mas de 12 helados desucento de 10%.
+//Adicional considerar que si el cliente tiene tarjeta de cliente frecuente se aplicara un descuento del 5% de la compra adicional sin importar el numero de productos.
+
+
+//Ingreso de variables globales.
+int iCPrice = 2;
+int NIcreams;
+int SaleNote;
+
+//Funciones para el calculo de descuento
+int discountSixP(int i) //Descuento del 6%
+{
+	int totalIcPrice = iCPrice * i;
+	int discount;
+	if(i > 5)
+	{
+		discount = 0.06 * totalIcPrice;
+	}
+	printf("Aplica Descuento 6%\n");
+	printf("Total: %i\n", discount);
+	return discount;
+}
+
+int discountEightP(int i)//Descuento del 8%
+{
+	int totalIcPrice = iCPrice * i;
+	int discount;
+	if(i > 8)
+	{
+		discount = 0.08 * totalIcPrice;
+	}
+	printf("Aplica Descuento 8%\n");
+	printf("Total: %i\n", discount);
+	return discount;
+}
+
+int discountTwelveP(int i) //Descuento del 12%
+{
+	int totalIcPrice = iCPrice * i;
+	int discount;
+	if(i > 12)
+	{
+		discount = 0.10 * totalIcPrice;
+	}
+	printf("Aplica Descuento 12%\n");
+	printf("Total: %i\n", discount);
+	return discount;
+}
+
+int discountClientCardFiveP(int i) //Descuento del 5% mas al total, por tener tarjeta de cliente 
+{ 
+	int discount;
+	discount = 0.10 * i;
+	printf("Aplica Descuento 5%\n");
+	printf("Total: %i\n", discount);
+	return discount;
+}
+
+int noApplyDiscount(int i)
+{
+	
+}
+int main(int argc, char *argv[]) 
+{
+	//Ingreso de datos del usuario
+	printf("Heladeria ...Pcta que rico eh!...\n");
+	printf("Ingrese la cantidad de helados que desea comprar\n");
+	scanf("%d",&NIcreams);
+	
+	//condicional para aplicar descuento
+	if (NIcreams>5)
+	{
+		discountSixP(NIcreams);
+	}
+	else
+	{
+		
+	}
+	return 0;
+}
+	
