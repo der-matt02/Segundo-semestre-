@@ -13,16 +13,13 @@ int NIcreams;
 int SaleNote;
 
 //Funciones para el calculo de descuento
-int discountSixP(int i) //Descuento del 6%
+float discountSixP(int i) //Descuento del 6%
 {
 	int totalIcPrice = iCPrice * i;
-	int discount;
-	if(i > 5)
-	{
-		discount = 0.06 * totalIcPrice;
-	}
+	float discount;
+	discount = 0.06 * totalIcPrice;
 	printf("Aplica Descuento 6%\n");
-	printf("Total: %i\n", discount);
+	printf("Total: %f\n", &discount);
 	return discount;
 }
 
@@ -31,9 +28,7 @@ int discountEightP(int i)//Descuento del 8%
 	int totalIcPrice = iCPrice * i;
 	int discount;
 	if(i > 8)
-	{
-		discount = 0.08 * totalIcPrice;
-	}
+	discount = 0.08 * totalIcPrice;
 	printf("Aplica Descuento 8%\n");
 	printf("Total: %i\n", discount);
 	return discount;
@@ -43,10 +38,7 @@ int discountTwelveP(int i) //Descuento del 12%
 {
 	int totalIcPrice = iCPrice * i;
 	int discount;
-	if(i > 12)
-	{
-		discount = 0.10 * totalIcPrice;
-	}
+	discount = 0.10 * totalIcPrice;
 	printf("Aplica Descuento 12%\n");
 	printf("Total: %i\n", discount);
 	return discount;
@@ -64,22 +56,28 @@ int discountClientCardFiveP(int i) //Descuento del 5% mas al total, por tener ta
 int noApplyDiscount(int i)
 {
 	
+	int totalIcPrice; 
+	totalIcPrice = iCPrice * i;
+	printf("No aplica descuento.\n");
+	printf("Total: %i\n", &totalIcPrice);
+	return totalIcPrice;
 }
+
 int main(int argc, char *argv[]) 
 {
 	//Ingreso de datos del usuario
 	printf("Heladeria ...Pcta que rico eh!...\n");
-	printf("Ingrese la cantidad de helados que desea comprar\n");
+	printf("Ingrese la cantidad de helados que desea comprar:\n");
 	scanf("%d",&NIcreams);
 	
 	//condicional para aplicar descuento
-	if (NIcreams>5)
+	if (NIcreams >= 5 || NIcreams < 8) //Aplica descuento 5%
 	{
 		discountSixP(NIcreams);
 	}
 	else
 	{
-		
+		noApplyDiscount(NIcreams);
 	}
 	return 0;
 }
