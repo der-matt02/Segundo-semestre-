@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main(int argc, char *argv[]) {
+	
+	float numbers[6];
+	int i;
+	int j;
+	int menor;
+	int mayor;
+	
+	//Ingreso de datos del Usuario
+	printf("Ingrese seis numeros para ver cual es mayor o menor:\n");
+	for (j = 0; j < 6; ++j)
+	{
+		printf("Ingrese el numero #%d \n", j);
+		scanf("%f",&numbers[j]);
+	}
+	//bulce for para iterar datos
+	for (i = 0; i < 6; ++i)
+	{
+		if(menor > numbers[i])
+		{
+			menor = numbers[i];
+		}
+		if(mayor < numbers[i])
+		{
+			mayor = numbers[i];
+		}	
+	}
+	printf("Mayor: %d\n", mayor);
+	printf("Menor: %d\n", menor);	
+	return 0;
+}
