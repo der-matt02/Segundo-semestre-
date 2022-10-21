@@ -2,7 +2,7 @@
 #include <stdlib.h>
 //Variables Globales
 int icUnits;
-int cardDisc;
+int cardDisc = 0 || 1;
 float discSixP = 0.94;
 float discEightP = 0.92;
 float discTenp = 0.9;
@@ -55,58 +55,63 @@ int main(int argc, char *argv[]) {
 	scanf("%d", &cardDisc);
 	
 	//Creacion de condicional para aplicar Descuento
-	if (icUnits < 5)
+	switch(cardDisc)
 	{
-		noApplyDiscount(icUnits);
-	}
-	else
-	{
-		if (icUnits >= 5 || icUnits < 8)
-		{
-			discount(icUnits, discSixP);
-		}
-		else
-		{
-			if (icUnits >= 8 || icUnits < 12)
+		case 0:
+			if (icUnits < 5)
 			{
-				discount(icUnits, discEightP );
+				noApplyDiscount(icUnits);
 			}
 			else
 			{
-				if (icUnits >= 12)
+				if (icUnits >= 5 || icUnits < 8)
 				{
-					discount(icUnits, discTenp);
+					discount(icUnits, discSixP);
 				}
 				else
 				{
-					if (icUnits >= 5 || icUnits < 8 && cardDisc == 1 )
+					if (icUnits >= 8 || icUnits < 12)
 					{
-						discount(icUnits, dcCardnSixP);
+						discount(icUnits, discEightP );
 					}
 					else
 					{
-						if (icUnits >= 8 || icUnits < 12 && cardDisc == 1 )
+						if (icUnits >= 12)
 						{
-							discount(icUnits, dcCardnEightP);
-						}
-						else
-						{
-							if (icUnits >= 12 && cardDisc == 1 )
-							{
-								discount(icUnits, dcCardnTenP);
-							}
-							else
-							{
-								if (icUnits < 5 && cardDisc == 1 )
-								{
-									noApplyDiscWithCard(icUnits, discFiveP);
-								}
-							}
+							discount(icUnits, discTenp);	
 						}
 					}
 				}
 			}
-		}
+			break;
+			
+		case 1:
+			if (icUnits >= 5 || icUnits < 8 && cardDisc == 1)
+			{
+				discount(icUnits, dcCardnSixP);	
+			}
+			else
+			{
+				if (icUnits >= 8 || icUnits < 12 && cardDisc == 1)
+				{
+					discount(icUnits, dcCardnEightP);
+				}
+				else
+				{
+					if (icUnits >= 12 && cardDisc == 1)
+					{
+						discount(icUnits, dcCardnTenP);	
+					}
+					else
+					{
+						if (icUnits < 5 && cardDisc == 1)
+						{
+							noApplyDiscWithCard(icUnits, discFiveP);
+						}
+					}
+				}
+			}
+			break;				
 	}
 	return 0;
 }
