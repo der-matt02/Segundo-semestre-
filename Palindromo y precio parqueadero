@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+//Varabiles Globales
+int palindrome;
+
+//funcion para derminar si el numero es palindromo.
+int palCalc (int i)
+{
+	//varaibles 
+	int value = i;
+	int reversed = 0;
+	
+	//bucle while para verificar si es palindromo
+	while (value)
+	{
+		int rear = value %10;
+		reversed = reversed * 10 + rear;
+		value = value / 10;
+	}
+	return(i == reversed);
+}
+
+int main(int argc, char *argv[]) {
+	//Creacion de menu 
+	printf("Ingrese el numero para saber si es un numero palindromo:\n");
+	scanf("%i", &palindrome);
+	
+
+	//Condicional clasificar numero ingresado como palindromo o no
+	if(palCalc(palindrome))
+	{
+		printf("Es palindromo");
+	}
+	else
+	{
+		printf("No es palindromo");
+	}
+	
+	return 0;
+}
