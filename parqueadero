@@ -1,0 +1,92 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <math.h>
+
+//variables Globales 
+time_t timeNow;
+float Ohrs = 0;
+float Omin = 0;
+float Ihrs = 0;
+float Imin = 0;
+int card;
+float disc = 0;
+int validate = 1;
+//funcion para calcular tarifa 
+float payMount(float i, float j, float k, float l)
+{
+	//conversor de minutos a horas
+	float minIConvert = j / 60;
+	float minOConvert = l / 60;
+	//suma minutos convertidos con hora de entrada y salida
+	float IhrsTotal = minIConvert + i;
+	float OhrsTotal = minOConvert + k;
+	//calculo de diferencia de hora
+	float hrsDiference = OhrsTotal - IhrsTotal;
+	hrsDiference = ceil(hrsDiference);
+	float value = hrsDiference * 1.20;
+	if(IhrsTotal <= OhrsTotal)
+	{
+		if(card == 1)
+		{
+			disc = value - value * 0.35;
+			printf("Aplica descuento afiliado\n");
+			printf("Total: %f", disc);
+		}
+		else
+		{
+			if(card == 0)
+			{
+				disc = value;
+				printf("No aplica descuento afiliado\n");
+				printf("Total: %f", disc);	
+			}
+		}
+	}
+	else
+	{
+		printf("Profe ingrese bien, quiere ver arder al mundo.");
+	}
+	return disc;
+}
+
+int main(int argc, char *argv[]) {
+	printf("...Parqueadero Sefiri...\n");
+	time(&timeNow);
+	printf("%s", ctime(&timeNow));
+	printf("\nhora actual:\n");
+	
+	//estructura de el tiempo en horas y minutos actuales
+	struct tm *myTime = localtime(&timeNow);
+	printf("%d:%d\n", myTime->tm_hour, myTime->tm_min);
+	
+	//ingreso de minutos y horas actuales
+	printf("Ingrese la hora de entrada en formato de 24 horas:\n");
+	scanf("%f", &Ihrs);
+	printf("Ingrese los minutos de entrada:\n");
+	scanf("%f", &Imin);
+	
+	//Ingreso de la hora de salida por el usuario
+	printf("Ingrese la hora de salida en formato de 24 horas:\n");
+	scanf("%f", &Ohrs);
+	printf("Ingrese los minutos de salida:\n");
+	scanf("%f", &Omin);
+	
+	//condicional para aplicar descuento del 35%
+	printf("Dispone de tarjeta afiliada, presione 0 si no tiene y 1 si tiene:");
+	scanf("%i", &card);
+	
+	//Salida de monto a pagar
+	if (Ihrs<=24 && Ohrs<=24 && Ihrs>=0 && Ohrs>=0 && Imin>=0 && Omin>=0 && Imin<60 && Omin<60)
+	{
+		if(Ihrs <= Ohrs)
+		{
+			payMount(Ihrs, Imin, Ohrs, Omin);	
+		}	
+	}
+	else
+	{
+		printf("CHISTOSITO PROFE, como va a hacer eso. Quiere ver arder el mundo.");
+	}
+	return 0;
+}
