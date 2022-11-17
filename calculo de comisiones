@@ -1,0 +1,83 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+
+//varaibles globales 
+int basicSalary; //almacena sueldo
+int numberOfSales; // almacena numero de ventas 
+int mount; //almacenar el monto de venta del empleado
+float commission; // almacena la comision ganada por el empleado
+float total; //almacena toda la ganancia del empleado
+
+//variables para almacenar el porcentaje a aplicar 
+float discTen = 0.10;
+float discTwelve = 0.12;
+float discFiveTeen = 0.15;
+
+//variables para almacenar todas las comisiones
+float commOne;
+float commTwo;
+float commThree;
+float allComms;
+//prototipado de funcion para calcular la comision del empleado
+void commCalc();
+
+int main(int argc, char *argv[]) {
+	//Iterador para bucle for
+	int i;
+	printf("...Calculo de Sueldo Final...\n");
+	
+	//Ingreso de datos por el usuario
+	printf("Ingrese el sueldo del empleado:\n");
+	scanf("%d", &basicSalary);
+	
+	printf("Ingrese la cantidad de ventas que ha hecho:\n");
+	scanf("%d", &numberOfSales);
+	
+	//bucle for para pedir al usuario el monto de las ventas y calcular las comisiones
+	for(i = 1; i <= numberOfSales; i++)
+	{
+		printf("Ingrese el monto #%d que ha vendido el empleado:\n", i);
+		scanf("%d", &mount);
+		commCalc();
+	}
+	// almacenamiento de todas las comisiones del empleado mas el salario
+	allComms = commOne + commTwo + commThree;
+	total = allComms + basicSalary;
+	
+	printf("\ntotal en comisiones: %f\n", allComms);
+	printf("\ntotal salario mas comisiones: %f\n", total);
+	return 0;
+}
+
+//funcion commCalc
+void commCalc()
+{
+	if(mount >= 100 && mount <= 200)
+	{
+		commission = mount * discTen;
+		commOne = commOne + commission;
+		printf("Aplica comision del 10%\n");
+		printf("subtotal: %f\n", commission);
+	}
+	else
+	{
+		if(mount >= 201 && mount <= 300)
+		{
+			commission = mount * discTwelve;
+			commTwo = commTwo + commission;
+			printf("Aplica comision del 12%\n");
+			printf("subtotal: %f\n", commission);
+		}
+		else
+		{
+			if(mount >= 301)
+			{
+				commission = mount * discFiveTeen;
+				commThree = commThree + commission;
+				printf("Aplica comision del 15%\n");
+				printf("subtotal: %f\n", commission);
+			}
+		}
+	}
+}
