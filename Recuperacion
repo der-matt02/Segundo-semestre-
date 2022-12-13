@@ -1,0 +1,269 @@
+#include <stdio.h>
+#include <stdlib.h>
+//variables globales 
+int i;
+int j;
+int pBrake = 4;    //cantidad pastillas-freno
+int kClutch = 1;  //cantidad kit embrague
+int tires = 4;   //cantidad llantas
+int applyDisc = 1200;
+float DiscMansuNGuaranda = 0.12;
+float DiscLqA = 0.125;
+float DiscACont = 0.11;
+int sMan;
+int sLqA;
+int sGFig;
+int sACon;
+int lessPriceND;
+
+float sManD;
+float sLqAD;
+float sGFigD;
+float sAConD;
+float valueD;
+float lessPriceWD;
+float BestD;
+
+//matrices globales 
+int Mansuera[1][3] = {{30,200,240}};
+int LqA[1][3] = {{28,230,238}};
+int GFigueroa[1][3] = {{33,190,220}};
+int AContinental[1][3] = {{29,200,180}};
+
+//Declaracion de Funcion: imprimir matriz
+void visual(int m[1][3]);
+
+//Declaracion Funcion Condicional para ver el mejor proveedor sin descuento
+int bestWare(int a, int b, int c, int d);
+
+//Declaracion Funcion calcular descuento de proovedores 
+float bestWareD(int e, float f);
+
+//Declaracion Funcion Condicional para ver el mejor proveedor con descuento
+float TotalBestWare(float a, float b, float c, float d);
+
+//Declaracion Funcion Calcular el mejor proovedor
+float BestDealer(int a, float b);
+
+//Declaracion Funcion Visualizacion del mejor proovedor
+void visualBestDealer();
+
+int main(int argc, char *argv[]) {
+	//UI Menu
+	printf(".... Best Price....\n");
+	printf("\n\n");
+	printf("...Lista de Provedores:...\n");
+	printf("\n\n");
+	printf("Mansuera:\n");
+	visual(Mansuera);
+	printf("\n\n");
+	printf("LQ Automotores:\n");
+	visual(LqA);
+	printf("\n\n");
+	printf("Guaranda Figueroa:\n");
+	visual(GFigueroa);
+	printf("\n\n");
+	printf("Automotores Continental:\n");
+	visual(AContinental);
+	
+	//suma de todos los productos * cantidad mas la muestra 
+	sMan = (pBrake * Mansuera[0][0]) + (kClutch * Mansuera[0][1]) + (tires * Mansuera[0][2]);
+	sLqA = (pBrake * LqA[0][0]) + (kClutch * LqA[0][1]) + (tires * LqA[0][2]);
+	sGFig = (pBrake * GFigueroa[0][0]) + (kClutch * GFigueroa[0][1]) + (tires * GFigueroa[0][2]);
+	sACon = (pBrake * AContinental[0][0]) + (kClutch * AContinental[0][1]) + (tires * AContinental[0][2]);
+	
+	//Condicional para saber cual es el mejor proveedor sin descuento
+	bestWare(sMan, sLqA, sGFig, sACon); 
+	
+	//Condicional mejor proovedor con descuento
+	sManD = bestWareD(sMan, DiscMansuNGuaranda); 
+	sLqAD = bestWareD(sLqA, DiscLqA);
+	sGFigD = bestWareD(sGFig, DiscMansuNGuaranda);
+ 	sAConD = bestWareD(sACon, DiscACont);
+ 	
+	//Condicional para ver el mejor precio con descuento
+	TotalBestWare(sManD, sLqAD, sGFigD, sAConD);
+	
+	//Funcion Calcular el mejor proovedor
+	BestDealer(lessPriceND, lessPriceWD);
+	
+	//Funcion Visualizacion del mejor proovedor
+	visualBestDealer();
+	/*
+	printf("\n%d\n", sGFig);
+	printf("\n%f\n",sGFigD);
+	printf("\n%f\n", BestD);
+	*/
+	return 0;
+}
+
+//Funcion imprimir tabla de precios 
+void visual(int m[1][3])
+{
+	printf("Pastillas Freno\t \tKit embrague\t Llantas\t\n");
+	for(i = 0; i < 1; i++)
+	{
+		for(j = 0; j < 3; j++)
+		{
+			printf("\t%d\t", m[i][j]);
+		}
+	}
+}
+
+//Funcion cual es el mejor proovedor sin descuento
+int bestWare(int a, int b, int c, int d)
+{
+	if(a < b && a < c && a < d)
+	{
+		lessPriceND = a;
+		return a;
+	}
+	else
+	{
+		if(b < a && b < c && b < d)
+		{
+			lessPriceND = b;
+			return b;
+		}
+		else
+		{
+			if(c < a && c < b && c < d)
+			{
+				lessPriceND = c;
+				return c;
+			}
+			else
+			{
+				lessPriceND = d;
+				return d;
+			}
+		}
+	}
+}
+
+//Funcion calcular descuento de proovedores 
+float bestWareD(int e, float f)
+{
+	float discount;
+	if(e > applyDisc)
+	{
+		discount = e * f;
+		valueD = e - discount;
+	}
+	else
+	{
+		valueD = e;
+	}
+	return valueD;
+}
+
+//Funcion Condicional para ver el mejor proveedor con descuento
+float TotalBestWare(float a, float b, float c, float d)
+{
+	if(a < b && a < c && a < d)
+	{
+		lessPriceWD = a;
+		return a;
+	}
+	else
+	{
+		if(b < a && b < c && b < d)
+		{
+			lessPriceWD = b;
+			return b;
+		}
+		else
+		{
+			if(c < a && c < b && c < d)
+			{
+				lessPriceWD = c;
+				return c;
+			}
+			else
+			{
+				lessPriceWD = d;
+				return d;
+			}	
+		}
+	}
+}
+
+//Funcion calcular el mejor proovedor 
+float BestDealer(int a, float b)
+{
+	if(a < b)
+	{
+		BestD = a;	
+	}
+	else
+	{
+		BestD = b;
+	}
+	return BestD;
+}
+
+//Funcion Visualizacion del mejor proovedor
+void visualBestDealer()
+{
+	if(BestD == sMan)
+	{
+		printf("\nEl mejor proveedor es Mansuera. Total: %f\n", BestD);
+		printf("\nNo Aplica descuento\n");
+	}
+	else
+	{
+		if(BestD == sManD)
+		{
+			printf("\nEl mejor proovedor es Mansuera. Total: %f\n", BestD);
+			printf("\nAplica descuento de: %f\n", DiscMansuNGuaranda);
+		}
+		else
+		{
+			if(BestD == sLqA)
+			{
+				printf("\nEl mejor proveedor es LQ Automotores. Total: %f\n", BestD);
+				printf("\nNo Aplica descuento\n");
+			}
+			else
+			{
+				if(BestD == sLqAD)
+				{
+					printf("\nEl mejor proovedor es LQ Automotores. Total: %f\n", BestD);
+					printf("\nAplica descuento de: %f\n", DiscLqA);
+				}
+				else
+				{
+					if(BestD == sGFig)
+					{
+						printf("\nEl mejor proveedor es Guaranda Figueroa. Total: %f\n", BestD);
+						printf("\nNo Aplica descuento\n");
+					}
+					else
+					{
+						if(BestD == sGFigD)
+						{
+							printf("\nEl mejor proovedor es Guaranda Figueroa. Total: %f\n", BestD);
+							printf("\nAplica descuento de: %f\n", DiscMansuNGuaranda);
+						}
+						else
+						{
+							if(BestD == sACon)
+							{
+								printf("\nEl mejor proveedor es Automotores Continental. Total: %f\n", BestD);
+								printf("\nNo Aplica descuento\n");
+							}
+							else
+							{
+								if(BestD == sAConD)
+								{
+									printf("\nEl mejor proovedor es Automotores Continental. Total: %f\n", BestD);
+									printf("\nAplica descuento de: %f\n", DiscACont);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
